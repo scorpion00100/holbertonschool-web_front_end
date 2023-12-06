@@ -1,0 +1,13 @@
+/* Assigns left and right margins to different HTML tags (using a mixin) */
+@mixin margins($size) {
+    margin-left: $size;
+    margin-right: $size;
+}
+
+body  {
+    @include margins(10px);
+}
+
+div {
+    @include margins(15px);
+}
