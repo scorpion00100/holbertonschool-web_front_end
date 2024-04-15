@@ -1,0 +1,33 @@
+{
+    "posts": [
+        {
+            "title": "tintin",
+            "author": "rose",
+            "id": 1
+        },
+        {
+            "title": "patpatrouille",
+            "author": "alindin",
+            "id": 2
+        },
+        {
+            "title": "titanic",
+            "author": "coralie",
+            "id": 3
+        },
+        {
+            "title": "disney",
+            "author": "bébé",
+            "id": 4
+        },
+        {
+            "title": "coca cola",
+            "author": "matthieu",
+            "id": 5
+        }
+    ],
+    "comments": [],
+    "profile": {
+        "name": "typicode"
+    }
+}
