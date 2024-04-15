@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 11</title>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous" type="application/javascript"></script>
+        <script type="application/javascript">
+            $(document).ready(function () {
+                function addPostRow(data) {
+                    $("form").after(`<p><span>Post created with id ${data.id}, title: ${data.title}, author: ${data.author}</span></p>`);
+                }
+
+                function listPosts() {
+                    $.get("http://localhost:3000/posts", function(data, status) {
+                        $.each(data, function (index, value) {
+                            addPostRow(value);
+                        });
+                    }).fail(function () {
+                        alert("Server Error");
+                    });
+                }
+
+                function buildForm() {
+                    $("body").prepend("<form>");
+                    $("form").append("<div><label for=\"author\">Author</label><input type=\"text\" id=\"author\"></div>");
+                    $("form").append("<div><label for=\"title\">Title</label><textarea id=\"title\"></textarea></div>");
+                    $("form").append("<input type=\"submit\">");
+                    $("form").on("submit", function (event) {
+                        event.preventDefault();
+                        sendForm();
+                    });
+                }
+
+                function sendForm() {
+                    $("form").after("About to send the query to the API");
+                    const new_post = {
+                        title: $("#title").val(),
+                        author: $("#author").val()
+                    };
+                    $.post("http://localhost:3000/posts", new_post, function (data, status) {
+                        addPostRow(data);
+                    }).fail(function () {
+                        alert("Error sending the POST query");
+                    }).always(function () {
+                        $('body').contents().filter(function(){
+                                return this.nodeType === 3;
+                            }).remove();
+                    });
+                }
+                listPosts();
+                buildForm();
+            });
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>
